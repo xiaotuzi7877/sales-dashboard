@@ -1,12 +1,13 @@
 import { headers } from 'next/headers'
-import ChartSwitcher from '../../components/ChartSwitcher'   
+import ChartSwitcher from '../../components/ChartSwitcher'
 
 async function getTotal() {
-  // build absolute URL for server-side fetch
+  const hdrs = await headers()   // await !
+
   const host =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : `https://${headers().get('host')}`
+      : `https://${hdrs.get('host')}`
 
   const res = await fetch(`${host}/api/sales`, { cache: 'no-store' })
   if (!res.ok) throw new Error('Failed to fetch sales')
@@ -26,12 +27,12 @@ export default async function DashboardPage() {
         <h3 className="text-sm">Years counted</h3>
         <p className="text-2xl font-bold">{years}</p>
       </div>
+
       <div className="rounded bg-green-50 p-4">
         <h3 className="text-sm">Total sales</h3>
         <p className="text-2xl font-bold">${total}</p>
       </div>
 
-      {/* chart section */}
       <ChartSwitcher />
     </main>
   )
