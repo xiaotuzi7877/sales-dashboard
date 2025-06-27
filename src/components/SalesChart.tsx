@@ -16,7 +16,7 @@ export default function SalesChart() {
   const [data, setData] = useState<SalesData[]>([])
 
   useEffect(() => {
-    fetch('/sales.json')
+    fetch('/api/sales')
       .then((res) => res.json())
       .then((d) => setData(d))
   }, [])
