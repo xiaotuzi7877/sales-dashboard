@@ -1,4 +1,5 @@
 import { headers } from 'next/headers'
+import ChartSwitcher from '../../components/ChartSwitcher'   
 
 async function getTotal() {
   // build absolute URL for server-side fetch
@@ -29,7 +30,9 @@ export default async function DashboardPage() {
         <h3 className="text-sm">Total sales</h3>
         <p className="text-2xl font-bold">${total}</p>
       </div>
-      {/* other components */}
+
+      {/* chart section */}
+      <ChartSwitcher />
     </main>
   )
 }
